@@ -1,0 +1,69 @@
+{
+  "providers": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-contactus-dev-93740-authRole",
+      "UnauthRoleArn": "arn:aws:iam::109881088269:role/amplify-contactus-dev-93740-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::109881088269:role/amplify-contactus-dev-93740-authRole",
+      "Region": "us-east-2",
+      "DeploymentBucketName": "amplify-contactus-dev-93740-deployment",
+      "UnauthRoleName": "amplify-contactus-dev-93740-unauthRole",
+      "StackName": "amplify-contactus-dev-93740",
+      "StackId": "arn:aws:cloudformation:us-east-2:109881088269:stack/amplify-contactus-dev-93740/d4b15a30-e571-11eb-b9de-0ad6e85a3bbc",
+      "AmplifyAppId": "d77e2skq9u49n"
+    }
+  },
+  "hosting": {},
+  "function": {
+    "sendSNS": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda",
+      "lastBuildTimeStamp": "2021-07-15T17:36:30.447Z",
+      "lastPackageTimeStamp": "2021-07-15T17:36:32.299Z",
+      "distZipFilename": "sendSNS-4e4d664a624b5357634b-build.zip",
+      "s3Bucket": {
+        "deploymentBucketName": "amplify-contactus-dev-93740-deployment",
+        "s3Key": "amplify-builds/sendSNS-4e4d664a624b5357634b-build.zip"
+      },
+      "providerMetadata": {
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-contactus-dev-93740-deployment/amplify-cfn-templates/function/sendSNS-cloudformation-template.json",
+        "logicalId": "functionsendSNS"
+      },
+      "lastPushTimeStamp": "2021-07-15T17:45:01.270Z",
+      "output": {
+        "Region": "us-east-2",
+        "Arn": "arn:aws:lambda:us-east-2:109881088269:function:sendSNS-dev",
+        "Name": "sendSNS-dev",
+        "LambdaExecutionRole": "contactusLambdaRole640d07b8-dev"
+      },
+      "lastPushDirHash": "6ycOAdrNzbFiA75TqQkNByJK0i0="
+    }
+  },
+  "api": {
+    "contactus": {
+      "service": "API Gateway",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": [
+        {
+          "category": "function",
+          "resourceName": "sendSNS",
+          "attributes": [
+            "Name",
+            "Arn"
+          ]
+        }
+      ],
+      "providerMetadata": {
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-contactus-dev-93740-deployment/amplify-cfn-templates/api/contactus-cloudformation-template.json",
+        "logicalId": "apicontactus"
+      },
+      "lastPushTimeStamp": "2021-07-15T17:45:01.273Z",
+      "output": {
+        "ApiName": "contactus",
+        "RootUrl": "https://764db96imh.execute-api.us-east-2.amazonaws.com/dev",
+        "ApiId": "764db96imh"
+      },
+      "lastPushDirHash": "gIADueCt+G0Ot4gfE2/Gi1fM1oQ="
+    }
+  }
+}

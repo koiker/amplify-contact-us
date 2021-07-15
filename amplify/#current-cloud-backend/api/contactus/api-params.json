@@ -1,0 +1,35 @@
+{
+  "paths": [
+    {
+      "name": "/send",
+      "lambdaFunction": "sendSNS",
+      "privacy": {
+        "open": true
+      },
+      "policyResourceName": "/send"
+    }
+  ],
+  "resourceName": "contactus",
+  "apiName": "contactus",
+  "functionArns": [
+    {
+      "lambdaFunction": "sendSNS"
+    }
+  ],
+  "privacy": {
+    "auth": 0,
+    "unauth": 0,
+    "authRoleName": "amplify-contactus-dev-93740-authRole",
+    "unAuthRoleName": "amplify-contactus-dev-93740-unauthRole"
+  },
+  "dependsOn": [
+    {
+      "category": "function",
+      "resourceName": "sendSNS",
+      "attributes": [
+        "Name",
+        "Arn"
+      ]
+    }
+  ]
+}
