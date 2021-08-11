@@ -1,23 +1,59 @@
-import logo from './logo.svg';
 import './App.css';
+import {useState} from 'react';
+import TextField from '@material-ui/core/TextField';
+import { makeStyles } from '@material-ui/core/styles';
+import Button from '@material-ui/core/Button';
+import FormControl from '@material-ui/core/FormControl';
+import Amplify, { API } from 'aws-amplify';
+import awsconfig from './aws-exports';
+
+Amplify.configure(awsconfig);
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    display: 'flex',
+    flexWrap: 'wrap',
+  },
+  margin: {
+    margin: theme.spacing(3),
+  },
+  textField: {
+    width: '20ch',
+  },
+}));
+
 
 function App() {
+  const classes = useStyles();
+  const [myMessage, setMessage] = useState('');
+  async function sendMessage(e) {
+    e.preventDefault();
+    const apiName = 'contactus';
+    const path = '/send';
+    const myInit = { // OPTIONAL
+      body: { nome: 'anonymous', email: 'anonymous@anonymous.net', mensagem: myMessage}, // replace this with attributes you need
+      headers: {}, // OPTIONAL
+    };
+    return await API.put(apiName, path, myInit);
+  }
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div className={classes.root}>
+      <FormControl fullWidth className={classes.margin}>
+        <TextField
+            id="outlined-multiline-static"
+            label="Contact-us"
+            multiline
+            rows={4}
+            defaultValue="Enter your message here."
+            variant="outlined"
+            onChange={({text}) => setMessage(text)}
+        />
+        <Button variant="contained" color="primary" className={classes.margin} onClick={sendMessage}>
+          Send
+        </Button>
+      </FormControl>
+      </div>
     </div>
   );
 }
